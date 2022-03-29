@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>english.qm</file>
+        <file>fermer.jpg</file>
+        <file>ouvrir.png</file>
+        <file>nouveau.png</file>
+        <file>imprimer.webp</file>
+        <file>chineese.qm</file>
+        <file>portuguese.qm</file>
+    </qresource>
+</RCC>
