@@ -4,10 +4,19 @@
 #include <QDebug>
 #include <QTranslator>
 #include <QInputDialog>
+#include <QString>
 #include "connection.h"
+#include "connection.h"
+#include "QTextStream"
+
+
+
 int main(int argc, char *argv[])
 {
+
+
     QApplication a(argc, argv);
+
     QTranslator t;
     QTranslator guide;
     QStringList langage;

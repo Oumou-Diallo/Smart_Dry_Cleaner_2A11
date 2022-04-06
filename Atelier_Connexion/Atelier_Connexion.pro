@@ -50,4 +50,5 @@ RESOURCES += \
 
 DISTFILES += \
     chineese.qm \
-    english.qm
+    english.qm \
+    logo.jpg

@@ -7,5 +7,11 @@
         <file>imprimer.webp</file>
         <file>chineese.qm</file>
         <file>portuguese.qm</file>
+        <file>logo.jpg</file>
+        <file>photo.png</file>
+        <file>1x/gestion.png</file>
+        <file>oumou-modified.png</file>
+        <file>1x/Fichier.png</file>
+        <file>1x/oumou.png</file>
     </qresource>
 </RCC>

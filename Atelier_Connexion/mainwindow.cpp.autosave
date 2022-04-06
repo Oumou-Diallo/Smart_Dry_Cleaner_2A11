@@ -89,7 +89,7 @@ QSqlQueryModel* MainWindow::historic_ajouter(int id_dep)
 {
     QSqlQueryModel* model= new QSqlQueryModel();
     QString id_string=QString::number(id_dep);
-    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense where id_dep LIKE id_string");
+    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Effectué le"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
@@ -102,7 +102,7 @@ QSqlQueryModel* MainWindow::historic_modifier(int id)
 {
     QSqlQueryModel* model= new QSqlQueryModel();
     QString id_string=QString::number(id);
-    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense where id_dep LIKE id_string");
+    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Effectué le"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));

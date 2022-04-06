@@ -23,10 +23,15 @@ public:
     void set_total(double);
     bool ajouter();
     QSqlQueryModel* afficher();
+    QSqlQueryModel* historic_ajouter(int);
+    QSqlQueryModel* tri_date();
+    QSqlQueryModel* tri_type();
+    QSqlQueryModel* tri_identifiant();
     QSqlQueryModel* afficher_historique();
     QSqlQueryModel* afficher_id();
     QSqlQueryModel* afficher_calculer();
     bool supprimer(int);
+    QSqlQuery recuperer(int);
     bool modifier(int,QString,QString,QDateTime);
     bool chercher(int);
     bool chercher_c(QString);

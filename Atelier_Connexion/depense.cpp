@@ -4,7 +4,8 @@
 #include <QString>
 #include <QtDebug>
 #include <QMessageBox>
-
+#include <QStandardItemModel>
+#include <QStandardItem>
 #include <QSqlError>
 
 Depense::Depense()
@@ -109,7 +110,7 @@ QSqlQueryModel* Depense::afficher()
 {
     QSqlQueryModel* model= new QSqlQueryModel();
 
-    model->setQuery("SELECT id_dep, type_dep, montant_dep, date_dep FROM dépense ORDER BY date_dep DESC");
+    model->setQuery("SELECT id_dep, type_dep, montant_dep, date_dep FROM dépense");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Montant"));
@@ -118,6 +119,39 @@ QSqlQueryModel* Depense::afficher()
 }
 
 
+QSqlQueryModel* Depense::tri_date()
+{
+    QSqlQueryModel* model= new QSqlQueryModel();
+
+model->setQuery("SELECT id_dep, type_dep, montant_dep, date_dep FROM dépense order by date_dep ASC");
+model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
+model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type"));
+model->setHeaderData(2, Qt::Horizontal, QObject::tr("Montant"));
+model->setHeaderData(3, Qt::Horizontal, QObject::tr("Date"));
+return model;}
+QSqlQueryModel* Depense::tri_type()
+{
+    QSqlQueryModel* model= new QSqlQueryModel();
+
+model->setQuery("SELECT id_dep, type_dep, montant_dep, date_dep FROM dépense order by type_dep ASC");
+model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
+model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type"));
+model->setHeaderData(2, Qt::Horizontal, QObject::tr("Montant"));
+model->setHeaderData(3, Qt::Horizontal, QObject::tr("Date"));
+return model;
+}
+
+QSqlQueryModel* Depense::tri_identifiant()
+{
+    QSqlQueryModel* model= new QSqlQueryModel();
+
+model->setQuery("SELECT id_dep, type_dep, montant_dep, date_dep FROM dépense order by id_dep ASC");
+model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
+model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type"));
+model->setHeaderData(2, Qt::Horizontal, QObject::tr("Montant"));
+model->setHeaderData(3, Qt::Horizontal, QObject::tr("Date"));
+return model;
+}
 
 QSqlQueryModel* Depense::afficher_historique()
 {
@@ -154,30 +188,6 @@ QSqlQueryModel* Depense::afficher_calculer()
 
 }
 
-double Depense::calculer(QString type_dep)
-{
-
-    QSqlQuery query;
-
-    query.prepare("Select montant_dep from dépense where type_dep=:type_dep");
-
-    double total=0;
-    if (query.exec())
-    {
-
-        while(query.next()){
-                   auto chk = query.value(2).toDouble();
-                   total=total+chk;
-
-
-                }
-           return total;
-    }
-
-
-    return total;
-
-}
 
 bool Depense::supprimer(int id_dep)
 {
@@ -187,6 +197,20 @@ bool Depense::supprimer(int id_dep)
                 query.prepare("Delete from dépense where id_dep=:id_dep");
                 query.bindValue(0,id_dep);
                 return query.exec();
+
+}
+
+QSqlQuery Depense::recuperer(int id_dep)
+{
+
+                QSqlQuery query;
+                QString id_string=QString::number(id_dep);
+                query.prepare("Select id_dep,type_dep,montant_dep,date_dep from dépense where id_dep=:id_string");
+                query.bindValue(0,id_string);
+                query.bindValue(1,type_dep);
+                query.bindValue(2,montant_dep);
+                query.bindValue(3,date_dep);
+                return query;
 
 }
 
