@@ -19,7 +19,8 @@
 #include <QDateTime>
 #include <iostream>
 #include <cstdlib>
-
+#include <QCursor>
+#include <qtextcursor.h>
 
 double calcval = 0.0;
 bool divTrigger = false;
@@ -39,7 +40,6 @@ MainWindow::MainWindow(QWidget *parent) :
     Hlay = new QHBoxLayout;
 
     ui->setupUi(this);
-
     ui->Display->setText(QString::number(calcval));
     QPushButton * numbuttons[10];
     for(int i = 0; i < 10; ++i){
@@ -89,7 +89,7 @@ QSqlQueryModel* MainWindow::historic_ajouter(int id_dep)
 {
     QSqlQueryModel* model= new QSqlQueryModel();
     QString id_string=QString::number(id_dep);
-    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense where id_dep LIKE id_string");
+    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense ORDER BY SYSDATE");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Effectué le"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
@@ -102,7 +102,7 @@ QSqlQueryModel* MainWindow::historic_modifier(int id)
 {
     QSqlQueryModel* model= new QSqlQueryModel();
     QString id_string=QString::number(id);
-    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense where id_dep LIKE id_string");
+    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense ORDER BY SYSDATE");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Effectué le"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
@@ -110,6 +110,7 @@ QSqlQueryModel* MainWindow::historic_modifier(int id)
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Date"));
     return model;
 }
+
 
 void MainWindow::NumPressed()
 {
@@ -311,7 +312,9 @@ void MainWindow::on_pushButton_supprimer_clicked()
   // QString montant_dep=q.value(2);
   // int id_dep=ui->lineEdit_is->text().toInt();
   // Write_supprimer(mfilename,id_dep,type_dep,montant_dep,date_dep);
+
   // Read_supprimer(mfilename);
+    //ui->table_hs->setModel(historic_supprimer(ui->lineEdit_is->text().toInt()));
    if(t)
    {bool test=D1.supprimer(D1.getid_dep());
        if(test==true){
@@ -332,6 +335,20 @@ void MainWindow::on_pushButton_supprimer_clicked()
 
 
 }
+
+QSqlQueryModel* MainWindow::historic_supprimer(int id)
+{
+    QSqlQueryModel* model= new QSqlQueryModel();
+    QString id_string=QString::number(id);
+    model->setQuery("SELECT sysdate,id_dep FROM dépense");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Effectué le"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Identifiant"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Montant"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Date"));
+    return model;
+}
+
 
 void MainWindow::on_pushButton_modifier_clicked()
 {    Depense D;
@@ -604,9 +621,20 @@ void MainWindow::on_actionImprimer_triggered()
 {
      QPrinter printer;
      printer.setPrinterName("desierd printer name");
+
      QPrintDialog dialog(&printer,this);
      if(dialog.exec() == QDialog::Rejected) return;
      ui->textEdit->print(&printer);
+
+   /* QPrinter printer;
+
+        QPrintDialog *dialog = new QPrintDialog(&printer, this);
+        dialog->setWindowTitle(tr("Print Document"));
+        if (ui->Cursor().hasSelection())
+            dialog->addEnabledOption(QAbstractPrintDialog::PrintSelection);
+        if (dialog->exec() != QDialog::Accepted)
+            return;*/
+
 }
 
 void MainWindow::on_tri_date_clicked()

@@ -66,6 +66,7 @@ private slots:
     void on_pushButton_plus_clicked();
     QSqlQueryModel* historic_modifier(int);
     QSqlQueryModel* historic_ajouter(int);
+    QSqlQueryModel* historic_supprimer(int);
     void on_pushButton_moins_clicked();
 
     void on_pushButton_fois_clicked();
@@ -91,6 +92,8 @@ private slots:
     void Read_ajouter(QString);
     void Write_supprimer(QString,int,QString,QString,QString);
     void Read_supprimer(QString);
+    void on_actionTout_Selectionner_triggered();
+
 private:
     Ui::MainWindow *ui;
     Depense D,Dm;

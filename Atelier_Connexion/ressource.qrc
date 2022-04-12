@@ -13,5 +13,14 @@
         <file>oumou-modified.png</file>
         <file>1x/Fichier.png</file>
         <file>1x/oumou.png</file>
+        <file>COLOR.png</file>
+        <file>coller.png</file>
+        <file>copier.png</file>
+        <file>couper.png</file>
+        <file>trouver.jpg</file>
+        <file>sélection.png</file>
+        <file>bold.png</file>
+        <file>italic.png</file>
+        <file>underline.png</file>
     </qresource>
 </RCC>
