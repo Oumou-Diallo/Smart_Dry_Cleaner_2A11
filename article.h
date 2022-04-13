@@ -13,6 +13,8 @@ public:
    Article(int,QString,int,QString);
 
        bool ajouter();
+       bool envoyerMessage(int,QString,int);
+       QSqlQueryModel * getMessages(int);
        bool archiver();
        bool desArchiver(int);
        bool ajouterHistorique(QString);

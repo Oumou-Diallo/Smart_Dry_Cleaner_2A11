@@ -41,6 +41,9 @@ bool Article::ajouter()
 return query.exec();
 }
 
+
+
+
 bool Article::archiver()
 {
     QSqlQuery query;
@@ -87,10 +90,14 @@ QSqlQueryModel * Article::Afficher()
         model->setQuery("select * from Articles");
         model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID "));
         model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
-        model->setHeaderData(2, Qt::Horizontal, QObject::tr("TYPE"));
-        model->setHeaderData(3, Qt::Horizontal, QObject::tr("PRIX"));
+        model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prix"));
+        model->setHeaderData(3, Qt::Horizontal, QObject::tr("type"));
 return model;
 }
+
+
+
+
 
 QSqlQueryModel * Article::AfficherArchive()
 {
@@ -99,8 +106,8 @@ QSqlQueryModel * Article::AfficherArchive()
         model->setQuery("select * from Articles_archives");
         model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID "));
         model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
-        model->setHeaderData(2, Qt::Horizontal, QObject::tr("TYPE"));
-        model->setHeaderData(3, Qt::Horizontal, QObject::tr("PRIX"));
+        model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRIX"));
+        model->setHeaderData(3, Qt::Horizontal, QObject::tr("TYPE"));
 return model;
 }
 
@@ -122,8 +129,8 @@ QSqlQueryModel * Article::triNom()
         model->setQuery("select * from Articles ORDER BY NOM");
         model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID "));
         model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
-        model->setHeaderData(2, Qt::Horizontal, QObject::tr("TYPE"));
-        model->setHeaderData(3, Qt::Horizontal, QObject::tr("PRIX"));
+        model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRIX"));
+        model->setHeaderData(3, Qt::Horizontal, QObject::tr("TYPE"));
 return model;
 }
 
@@ -132,10 +139,10 @@ QSqlQueryModel * Article::triPrix()
     QSqlQueryModel * model= new QSqlQueryModel();
 
         model->setQuery("select * from Articles ORDER BY PRIX");
-        model->setHeaderData(1, Qt::Horizontal, QObject::tr("ID "));
-        model->setHeaderData(2, Qt::Horizontal, QObject::tr("NOM"));
+        model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID "));
+        model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
+        model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRIX"));
         model->setHeaderData(3, Qt::Horizontal, QObject::tr("TYPE"));
-        model->setHeaderData(4, Qt::Horizontal, QObject::tr("PRIX"));
 return model;
 }
 
@@ -144,21 +151,22 @@ QSqlQueryModel * Article::triType()
     QSqlQueryModel * model= new QSqlQueryModel();
 
         model->setQuery("select * from Articles ORDER BY TYPE");
-        model->setHeaderData(1, Qt::Horizontal, QObject::tr("ID "));
-        model->setHeaderData(2, Qt::Horizontal, QObject::tr("NOM"));
+        model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID "));
+        model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
+        model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRIX"));
         model->setHeaderData(3, Qt::Horizontal, QObject::tr("TYPE"));
-        model->setHeaderData(4, Qt::Horizontal, QObject::tr("PRIX"));
 return model;
 }
 
-QSqlQueryModel *Article::cherch_art(QString nom)
+QSqlQueryModel *Article::cherch_art(QString nom) 
 {
     QSqlQueryModel * model= new QSqlQueryModel();
-        model->setQuery("select  * from Articles where NOM LIKE '%"+nom+"%'");
+        model->setQuery("select  * from Articles where NOM LIKE '%"+nom+"%' OR  TYPE LIKE '%"+nom+"%' ");
         model->setHeaderData(0, Qt::Horizontal, QObject::tr("id"));
         model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
         model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prix"));
         model->setHeaderData(3, Qt::Horizontal, QObject::tr("type"));
+        
 return model;
 }
 bool Article::modifier(int id ,QString nom)
@@ -171,4 +179,29 @@ return query.exec();
 }
 
 
+
+
+//chat
+
+bool Article::envoyerMessage(int de,QString msg,int a)
+{
+    QSqlQuery query;
+
+        query.prepare("INSERT INTO MESSAGE (ID_DESTINATAIRE, CONTENU,ID_ENVOYEUR) "
+                            "VALUES (:de, :msg, :a)");
+        query.bindValue(":de", de);
+        query.bindValue(":msg", msg);
+        query.bindValue(":a", a);
+return query.exec();
+}
+
+QSqlQueryModel * Article::getMessages(int id)//id user connecté
+{
+    QString ID = QString::number(id);
+    QSqlQueryModel * model= new QSqlQueryModel();
+
+        model->setQuery("select * from MESSAGE WHERE ID_DESTINATAIRE ="+ID);
+
+return model;
+}
 
