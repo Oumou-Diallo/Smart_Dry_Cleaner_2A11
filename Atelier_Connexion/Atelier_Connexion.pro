@@ -28,14 +28,20 @@ CONFIG += c++11
 
 SOURCES += \
     depense.cpp \
+    equipement.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    qcustomplot.cpp \
+    statistique.cpp
 
 HEADERS += \
     depense.h \
+    equipement.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    qcustomplot.h \
+    statistique.h
 
 FORMS += \
         mainwindow.ui

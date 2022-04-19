@@ -21,6 +21,9 @@
 #include <cstdlib>
 #include <QCursor>
 #include <qtextcursor.h>
+#include <QSqlDatabase>
+#include "equipement.h"
+
 
 double calcval = 0.0;
 bool divTrigger = false;
@@ -61,15 +64,21 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->lineEdit_ia->setValidator(new QIntValidator(0,9999999,this));
     ui->lineEdit_is->setValidator(new QIntValidator(0,9999999,this));
+    ui->lineEdit_id_eq_aj->setValidator(new QIntValidator(0,9999999,this));
+    ui->lineEdit_suppression->setValidator(new QIntValidator(0,9999999,this));
+
     ui->lineEdit_ma->setValidator(new QDoubleValidator(-999.0,999.0,2,this));
-    ui->lineEdit_im->setValidator(new QIntValidator(0,9999999,this));
     ui->lineEdit_mm->setValidator(new QDoubleValidator(-999.0,999.0,2,this));
+    ui->lineEdit_qte_eq_m->setValidator(new QDoubleValidator(-999.0,999.0,2,this));
+    ui->lineEdit_qte_eq_aj->setValidator(new QDoubleValidator(-999.0,999.0,2,this));
 
 
 
-    ui->t_depense->setModel(D.afficher_id());
 
    ui->table_depense->setModel(D.afficher());
+   ui->comboBox_id_dep_m->setModel(D.afficher());
+   ui->table_eq_aff->setModel(E1.afficher_eq());
+   ui->comboBox_id_eq_m->setModel(E1.afficher_eq());
 }
 
 MainWindow::~MainWindow()
@@ -85,11 +94,11 @@ void MainWindow::writetofile()
 
 }
 
-QSqlQueryModel* MainWindow::historic_ajouter(int id_dep)
+QSqlQueryModel* MainWindow::historic_ajouter(int id)
 {
     QSqlQueryModel* model= new QSqlQueryModel();
-    QString id_string=QString::number(id_dep);
-    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense ORDER BY SYSDATE");
+    QString id_string=QString::number(id);
+    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense where id_dep LIKE '" +id_string+"' ORDER BY SYSDATE");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Effectué le"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
@@ -102,7 +111,7 @@ QSqlQueryModel* MainWindow::historic_modifier(int id)
 {
     QSqlQueryModel* model= new QSqlQueryModel();
     QString id_string=QString::number(id);
-    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense ORDER BY SYSDATE");
+    model->setQuery("SELECT sysdate,id_dep,type_dep,montant_dep,date_dep FROM dépense where id_dep LIKE '" +id_string+"' ORDER BY SYSDATE");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Effectué le"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
@@ -285,7 +294,7 @@ void MainWindow::on_pb_ajouter_clicked()
    msgbox.setText("ajout réussi");
    msgbox.exec();
    ui->table_depense->setModel(D.afficher());
-    ui->t_depense->setModel(D.afficher_id());
+    ui->comboBox_id_dep_m->setModel(D.afficher());
     ui->table_ha->setModel(historic_ajouter(id_dep));
 
     }
@@ -317,11 +326,12 @@ void MainWindow::on_pushButton_supprimer_clicked()
     //ui->table_hs->setModel(historic_supprimer(ui->lineEdit_is->text().toInt()));
    if(t)
    {bool test=D1.supprimer(D1.getid_dep());
+       ui->comboBox_id_dep_m->setModel(D1.afficher());
        if(test==true){
        msgbox.setText("suppression réussie");
        msgbox.exec();
        ui->table_depense->setModel(D1.afficher());
-        ui->t_depense->setModel(D.afficher_id());}
+        }
        else {
        msgbox.setText("echec de la suppression");
        msgbox.exec();
@@ -353,8 +363,7 @@ QSqlQueryModel* MainWindow::historic_supprimer(int id)
 void MainWindow::on_pushButton_modifier_clicked()
 {    Depense D;
      QString type_dep;
-     ui->t_depense->setModel(D.afficher_id());
-     int id_dep=ui->lineEdit_im->text().toInt();
+     int id_dep= ui->comboBox_id_dep_m->currentText().toInt();
      if(ui->radioButton_sm->isChecked())
       {
 
@@ -399,7 +408,7 @@ void MainWindow::on_pushButton_modifier_clicked()
       QMessageBox msgbox;
       QSqlQuery query;
       QString id_string=QString::number(id_dep);
-       bool t=D.chercher(ui->lineEdit_im->text().toInt());
+       bool t=D.chercher(ui->comboBox_id_dep_m->currentText().toInt());
        if(t)
        {  query.prepare("Update dépense set type_dep=:type_dep, montant_dep=:montant_dep , date_dep=:date_dep where id_dep=:id_string");
           query.bindValue(":id_string",id_string);
@@ -408,7 +417,7 @@ void MainWindow::on_pushButton_modifier_clicked()
           query.bindValue(":date_dep",date_dep);
           query.exec();
            ui->table_depense->setModel(D.afficher());
-           ui->table_hm->setModel(historic_modifier(ui->lineEdit_im->text().toInt()));
+           ui->table_hm->setModel(historic_modifier(ui->comboBox_id_dep_m->currentText().toInt()));
 
             if(query.exec())
             {
@@ -619,21 +628,56 @@ void MainWindow::on_actionSortir_triggered()
 
 void MainWindow::on_actionImprimer_triggered()
 {
-     QPrinter printer;
-     printer.setPrinterName("desierd printer name");
+    QString strStream;
+            QTextStream out(&strStream);
 
-     QPrintDialog dialog(&printer,this);
-     if(dialog.exec() == QDialog::Rejected) return;
-     ui->textEdit->print(&printer);
+                                 const int rowCount = ui->table_depense->model()->rowCount();
+                                 const int columnCount = ui->table_depense->model()->columnCount();
+                                 QString TT = QDate::currentDate().toString("yyyy/MM/dd");
+                                 out <<"<html>\n"
+                                       "<head>\n"
+                                        "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+                                     << "<title>ERP - CONTRAT<title>\n "
+                                     << "</head>\n"
+                                     "<body bgcolor=#FA8072 link=#C0C0C0>\n"
+                                     "<h1 style=\"text-align: center;\"><strong> ******LISTE DES DEPENSES ******"+TT+" </strong></h1>"
+                                     "<table style=\"text-align: center; font-size: 20px;\" border=1>\n "
+                                       "</br> </br>";
+                                 // headers
+                                 out << "<thead><tr bgcolor=#d6e5ff>";
+                                 for (int column = 0; column < columnCount; column++)
+                                     if (!ui->table_depense->isColumnHidden(column))
+                                         out << QString("<th>%1</th>").arg(ui->table_depense->model()->headerData(column, Qt::Horizontal).toString());
+                                 out << "</tr></thead>\n";
 
-   /* QPrinter printer;
+                                 // data table
+                                 for (int row = 0; row < rowCount; row++) {
+                                     out << "<tr>";
+                                     for (int column = 0; column < columnCount; column++) {
+                                         if (!ui->table_depense->isColumnHidden(column)) {
+                                             QString data =ui->table_depense->model()->data(ui->table_depense->model()->index(row, column)).toString().simplified();
+                                             out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+                                         }
+                                     }
+                                     out << "</tr>\n";
+                                 }
+                                 out <<  "</table>\n"
+                                     "</body>\n"
+                                     "</html>\n";
 
-        QPrintDialog *dialog = new QPrintDialog(&printer, this);
-        dialog->setWindowTitle(tr("Print Document"));
-        if (ui->Cursor().hasSelection())
-            dialog->addEnabledOption(QAbstractPrintDialog::PrintSelection);
-        if (dialog->exec() != QDialog::Accepted)
-            return;*/
+                                 QTextDocument *document = new QTextDocument();
+                                 document->setHtml(strStream);
+
+                                 QPrinter printer;
+
+                                 QPrintDialog *dialog = new QPrintDialog(&printer, nullptr);
+                                 if (dialog->exec() == QDialog::Accepted) {
+                                     document->print(&printer);
+                                 }
+
+                                 delete document;
+
+
 
 }
 
@@ -671,4 +715,337 @@ void MainWindow::on_tri_type_clicked()
 
 
     }
+}
+
+void MainWindow::on_pushButton_ajouter_eq_clicked()
+{
+    QString id_eq=ui->lineEdit_id_eq_aj->text();
+    bool id_ok=true;
+    int qte_eq=ui->lineEdit_qte_eq_aj->text().toInt();
+    bool qte_ok=true;
+    QString etat=ui->comboBox_etat->currentText();
+    bool etat_ok=true;
+    QString type_eq=ui->comboBox_type_eq->currentText();
+    bool type_ok=true;
+
+
+    ui->label_ii->setText("");
+    ui->label_qi->setText("");
+
+    for (int i=0;i<id_eq.length();i++) {
+        if(id_eq[i]!="0" && id_eq[i]!="1" && id_eq[i]!="2" && id_eq[i]!="3" && id_eq[i]!="4" && id_eq[i]!="5" && id_eq[i]!="6" && id_eq[i]!="7" && id_eq[i]!="8" && id_eq[i]!="9" )
+        {
+            id_ok=false;
+            break;
+        }
+    }
+
+    if(id_eq.length()==0)
+        id_ok=false;
+    if(etat.length()==0)
+        etat_ok=false;
+    if(qte_eq<=0)
+        qte_ok=false;
+    if(type_eq.length()==0)
+        type_ok=false;
+
+
+    if(!id_ok)
+    {
+        ui->label_ii->setText("invalide");
+    }
+
+    else if(!qte_ok)
+         ui->label_qi->setText("invalide");
+    else
+    {
+    int id= ui->lineEdit_id_eq_aj->text().toInt();
+    QString et= ui->comboBox_etat->currentText();
+    QString ty= ui->comboBox_type_eq->currentText();;
+    int qte= ui->lineEdit_qte_eq_aj->text().toInt();
+    equipement E(id,et,ty,qte);
+
+    bool test =E.ajouter_eq();
+    QMessageBox msgBox;
+
+    if(test)
+       {
+           msgBox.setText("Ajout avec succes.");
+           ui->table_eq_aff->setModel(E.afficher_eq());
+           ui->comboBox_id_eq_m->setModel(E.afficher_eq());
+           //this->notification();
+          // ui->table_historic_ajouter->setModel(historic_ajouter());
+       }
+    else
+          msgBox.setText("Echec d'ajout");
+    msgBox.exec();
+    //this->notification();
+    //E.historique(ui->lineEdit_id_eqA->text().toStdString(),"ajout");
+    }
+
+}
+
+void MainWindow::on_pushButton_modifier_eq_clicked()
+{
+
+    int qte_p= ui->lineEdit_qte_eq_m->text().toInt();
+    bool qte_ok=true;
+
+
+    ui->label_qim->setText("");
+
+
+
+    if(qte_p<=0)
+        qte_ok=false;
+
+      else if(!qte_ok)
+         ui->label_qim->setText("invalide");
+    else
+    {
+        int id_p= ui->comboBox_id_eq_m->currentText().toInt();
+        QString et_p= ui->comboBox_etat_m->currentText();
+        QString ty_p= ui->comboBox_type_eq_m->currentText();
+        int qte= ui->lineEdit_qte_eq_m->text().toInt();
+        equipement E(id_p,et_p,ty_p,qte);
+
+        bool test =E.modifier_eq();
+        QMessageBox msgBox;
+
+        if(test)
+           {
+               msgBox.setText("modification avec succes.");
+               ui->table_eq_aff->setModel(E.afficher_eq());
+               //ui->table_historic_modifier->setModel(historic_modfication());
+           }
+        else
+              msgBox.setText("Echec de la modification");
+        msgBox.exec();
+
+        //E.historique(ui->lineEdit_id_eqA->text().toStdString(),"modification");
+    }
+
+   // this->notification();
+}
+
+void MainWindow::on_pushButton_supprimer_eq_clicked()
+{
+    equipement Em; Em.set_id_eq(ui->lineEdit_suppression->text().toInt());
+    bool test = Em.supprimer_eq(Em.get_id_eq());
+    QMessageBox msgBox;
+
+    if(test)
+    {
+        msgBox.setText("Suppression avec succes.");
+    ui->table_eq_aff->setModel(Em.afficher_eq());
+    ui->comboBox_id_eq_m->setModel(Em.afficher_eq());
+
+    }
+    else
+        msgBox.setText("Echec de suppression");
+    msgBox.exec();
+}
+
+void MainWindow::on_radioButton_qte_eq_aff_clicked()
+{
+    if(ui->tri_qte_eq_aff->isChecked())
+    {
+
+   ui->table_eq_aff->setModel(E1.tri_qte_eq());
+
+
+    }
+}
+
+void MainWindow::on_tri_id_eq_aff_clicked()
+{
+    if(ui->tri_id_eq_aff->isChecked())
+    {
+
+   ui->table_eq_aff->setModel(E1.tri_identifiant());
+
+
+    }
+}
+
+void MainWindow::on_tri_type_eq_aff_clicked()
+{
+    if(ui->tri_type_eq_aff->isChecked())
+    {
+
+   ui->table_eq_aff->setModel(E1.tri_type_eq());
+
+
+    }
+}
+
+void MainWindow::on_tri_etat_aff_clicked()
+{
+    if(ui->tri_etat_aff->isChecked())
+    {
+
+   ui->table_eq_aff->setModel(E1.tri_etat());
+
+
+    }
+}
+
+void MainWindow::on_tri_qte_eq_aff_clicked()
+{
+    if(ui->tri_qte_eq_aff->isChecked())
+    {
+
+   ui->table_eq_aff->setModel(E1.tri_qte_eq());
+
+
+    }
+}
+
+
+
+void MainWindow::on_lineEdit_rechercher_textEdited(const QString &arg1)
+{
+    equipement E;
+
+    ui->table_eq_aff->setModel(E.cherch_etat(arg1));
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    QString strStream;
+            QTextStream out(&strStream);
+
+                                 const int rowCount = ui->table_depense->model()->rowCount();
+                                 const int columnCount = ui->table_depense->model()->columnCount();
+                                 QString TT = QDate::currentDate().toString("yyyy/MM/dd");
+                                 out <<"<html>\n"
+                                       "<head>\n"
+                                        "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+                                     << "<title>ERP - CONTRAT<title>\n "
+                                     << "</head>\n"
+                                     "<body bgcolor=#FA8072 link=#C0C0C0>\n"
+                                     "<h1 style=\"text-align: center;\"><strong> ******LISTE DES DEPENSES ******"+TT+" </strong></h1>"
+                                     "<table style=\"text-align: center; font-size: 20px;\" border=1>\n "
+                                       "</br> </br>";
+                                 // headers
+                                 out << "<thead><tr bgcolor=#d6e5ff>";
+                                 for (int column = 0; column < columnCount; column++)
+                                     if (!ui->table_depense->isColumnHidden(column))
+                                         out << QString("<th>%1</th>").arg(ui->table_depense->model()->headerData(column, Qt::Horizontal).toString());
+                                 out << "</tr></thead>\n";
+
+                                 // data table
+                                 for (int row = 0; row < rowCount; row++) {
+                                     out << "<tr>";
+                                     for (int column = 0; column < columnCount; column++) {
+                                         if (!ui->table_depense->isColumnHidden(column)) {
+                                             QString data =ui->table_depense->model()->data(ui->table_depense->model()->index(row, column)).toString().simplified();
+                                             out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+                                         }
+                                     }
+                                     out << "</tr>\n";
+                                 }
+                                 out <<  "</table>\n"
+                                     "</body>\n"
+                                     "</html>\n";
+
+                                 QTextDocument *document = new QTextDocument();
+                                 document->setHtml(strStream);
+
+                                 QPrinter printer;
+
+                                 QPrintDialog *dialog = new QPrintDialog(&printer, nullptr);
+                                 if (dialog->exec() == QDialog::Accepted) {
+                                     document->print(&printer);
+                                 }
+
+                                 delete document;
+
+
+
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QString strStream;
+            QTextStream out(&strStream);
+
+                                 const int rowCount = ui->table_eq_aff->model()->rowCount();
+                                 const int columnCount = ui->table_eq_aff->model()->columnCount();
+                                 QString TT = QDate::currentDate().toString("yyyy/MM/dd");
+                                 out <<"<html>\n"
+                                       "<head>\n"
+                                        "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+                                     << "<title>ERP - CONTRAT<title>\n "
+                                     << "</head>\n"
+                                     "<body bgcolor=#FA8072 link=#C0C0C0>\n"
+                                     "<h1 style=\"text-align: center;\"><strong> ******LISTE DES EQUIPEMENTS ******"+TT+" </strong></h1>"
+                                     "<table style=\"text-align: center; font-size: 20px;\" border=1>\n "
+                                       "</br> </br>";
+                                 // headers
+                                 out << "<thead><tr bgcolor=#d6e5ff>";
+                                 for (int column = 0; column < columnCount; column++)
+                                     if (!ui->table_eq_aff->isColumnHidden(column))
+                                         out << QString("<th>%1</th>").arg(ui->table_eq_aff->model()->headerData(column, Qt::Horizontal).toString());
+                                 out << "</tr></thead>\n";
+
+                                 // data table
+                                 for (int row = 0; row < rowCount; row++) {
+                                     out << "<tr>";
+                                     for (int column = 0; column < columnCount; column++) {
+                                         if (!ui->table_eq_aff->isColumnHidden(column)) {
+                                             QString data =ui->table_eq_aff->model()->data(ui->table_eq_aff->model()->index(row, column)).toString().simplified();
+                                             out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+                                         }
+                                     }
+                                     out << "</tr>\n";
+                                 }
+                                 out <<  "</table>\n"
+                                     "</body>\n"
+                                     "</html>\n";
+
+                                 QTextDocument *document = new QTextDocument();
+                                 document->setHtml(strStream);
+
+                                 QPrinter printer;
+
+                                 QPrintDialog *dialog = new QPrintDialog(&printer, nullptr);
+                                 if (dialog->exec() == QDialog::Accepted) {
+                                     document->print(&printer);
+                                 }
+
+                                 delete document;
+
+
+
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+     S.stat(ui->widget_statistique);
+}
+
+void MainWindow::Alert(){
+    QSqlQueryModel* model =new QSqlQueryModel();
+    QString S=QString::number(Seuil);
+    model->setQuery("SELECT * FROM Equipement WHERE QTE_EQ < "+S);
+    if (model->rowCount() == 1){
+        QString produitNom =model->data(ui->table_eq_aff->model()->index(0,2)).toString();
+
+        notifyIcon->show();
+        notifyIcon->showMessage("alerte equipement ","l'equipement "+produitNom+" presque epuisé ",QSystemTrayIcon::Information,15000);
+
+    } else if (model->rowCount() > 1) {
+        notifyIcon->show();
+        notifyIcon->showMessage("alerte equipement ","les equipements sont presque expirés ",QSystemTrayIcon::Information,15000);
+    }
+
+}
+void MainWindow::on_spinBox_valueChanged(int arg1)
+{
+
+    Seuil = arg1;
+    Alert();
+
 }
