@@ -1,0 +1,7 @@
+mar. avr. 26 18:10:17 2022 L'ajout d'un client a la base de donnees de nom = SALI a ete effectue avec succees
+mar. avr. 26 18:17:56 2022 La suppression d'un client a la base de donnees de Nom =  a ete effectue avec succees
+mar. avr. 26 18:18:19 2022 L'ajout d'un client a la base de donnees de nom = oo a ete effectue avec succees
+mar. avr. 26 18:19:14 2022 La modification d'une client a la base de donnees du nom = RDFG a ete effectue avec succees
+mar. avr. 26 18:19:40 2022 La modification d'une client a la base de donnees du nom = RDFG a ete effectue avec succees
+mar. avr. 26 18:20:18 2022 La modification d'une client a la base de donnees du nom = RDFG a ete effectue avec succees
+mar. avr. 26 18:24:22 2022 La modification d'une client a la base de donnees du nom = iukhj a ete effectue avec succees

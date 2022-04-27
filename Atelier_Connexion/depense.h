@@ -22,6 +22,9 @@ public:
     void setdate_dep(QDate);
     void set_total(double);
     bool ajouter();
+    bool ajouter_historic_depense();
+    bool modifier_historic_depense(int,QString,QString);
+    bool supprimer_historic_depense(int);
     QSqlQueryModel* afficher();
     QSqlQueryModel* historic_ajouter(int);
     QSqlQueryModel* tri_date();

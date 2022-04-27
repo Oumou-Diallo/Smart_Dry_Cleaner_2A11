@@ -20,6 +20,16 @@
 #include <QString>
 #include "equipement.h"
 #include "statistique.h"
+#include "statistiques.h"
+#include "article.h"
+#include "client.h"
+#include "arduino.h"
+#include <QtCharts/QCategoryAxis>
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+#include <QPainter>
+#include <QSqlQuery>
+#include <QDialog>
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +42,12 @@ class MainWindow : public QMainWindow
     double getlineEditNum();
     void writeResult(double tempresult);
 public:
+    //statistique:::
+
+
+
+
+
     QComboBox * cbox;
     QPushButton * qButton;
     QSpinBox * sBox;
@@ -39,6 +55,8 @@ public:
     QHBoxLayout * Hlay;
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+     void Alert(int nb,QString nomProduit);
+     int getselectedclient();
 
 private slots:
 
@@ -65,8 +83,10 @@ private slots:
 
 
     void on_pushButton_plus_clicked();
-    QSqlQueryModel* historic_modifier(int);
-    QSqlQueryModel* historic_ajouter(int);
+    bool ajouter_historic_depense();
+    QSqlQueryModel*  historic_ajouter_equipement();
+    QSqlQueryModel* historic_modifier();
+    QSqlQueryModel* historic_ajouter();
     QSqlQueryModel* historic_supprimer(int);
     void on_pushButton_moins_clicked();
 
@@ -123,18 +143,98 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_3_clicked();
+
+    void on_pushButton_ajouter_article_clicked();
+    void refresh();
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_modifier_article_clicked();
+
+    void on_pushButton_excel_clicked();
+
+    void on_pushButton_excel_equipement_clicked();
+
+    void on_pushButton_excel_depense_clicked();
+
+    void on_radioButton_type_art_clicked();
+
+    void on_radioButton_id_art_clicked();
+
+    void on_radioButton_nom_art_clicked();
+
+    void on_radioButton_prix_art_clicked();
+
+    void on_lineEdit_rechercher_article_textEdited(const QString &arg1);
+
+
+
+    void on_commandLinkButton_clicked();
+
+    void on_pushButton_ajouter_client_clicked();
+
+    void on_pushButton_supprimer_client_clicked();
+
+    void on_pushButton_7_clicked();
+
+
+
+    void on_lineEdit_textEdited(const QString &arg1);
+
+    void on_radioButton_clicked();
+
+    void on_tri_nom_cl_clicked();
+
+    void on_tri_id_cl_clicked();
+
+    void on_tri_service_cl_clicked();
+
+    void on_pushButton_imprimer_client_clicked();
+
+    void on_pushButton_statistique_client_clicked();
+
+    void on_pushButton_excel_client_clicked();
+
+    void on_pushButton_pdf_client_clicked();
+
+    void on_pushButton_pdf_depense_clicked();
+
+
+    
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_12_clicked();
+
+    void on_pushButton_hist_client_clicked();
+
+    void on_pushButton_8_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_9_clicked();
+
+    /*void on_OUVRIR_clicked();
+    void update_label();
+    void on_FERMER_clicked();*/
+
 public:
     void on_spinBox_valueChanged(int arg1);
 
     void Alert();
 
 private:
+    QByteArray data;
+    //Arduino A;
     int Seuil;
     QSystemTrayIcon *notifyIcon = new QSystemTrayIcon;
     Ui::MainWindow *ui;
     Depense D,Dm;
+    Article Ar;
     equipement E1;
     statistique S;
+    statistiques SS;
+    Client C;
 };
 
 #endif // MAINWINDOW_H

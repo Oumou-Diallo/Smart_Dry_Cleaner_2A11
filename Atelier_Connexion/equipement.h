@@ -38,6 +38,9 @@ public:
     QSqlQueryModel* afficher_eq();
     bool supprimer_eq(int);
     bool modifier_eq();
+    bool chercher(QString);
+    bool ajouter_historic_equipement();
+    bool modifier_historic_equipement(int,QString,QString,QString);
 
     QSqlQueryModel *cherch_identifiant(int);
     QSqlQueryModel *cherch_type(QString);

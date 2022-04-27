@@ -1,0 +1,3 @@
+mar. avr. 26 21:48:11 2022 La modification d'un article a la base de donnees d'identifiant = 122222 , de type= Robe, de montant 1213 et de nom = tora ete effectue avec succes
+mar. avr. 26 21:50:03 2022 La modification d'un article a la base de donnees d'identifiant = 7 , de type= Tee-Shirt, de montant = 23 et de nom = EZAQa ete effectue avec succes
+mar. avr. 26 21:51:32 2022 La suppression d'un article a la base de donnees d'identifiant = 3  a ete effectue avec succes

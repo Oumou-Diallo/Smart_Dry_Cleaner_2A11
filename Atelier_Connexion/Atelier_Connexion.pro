@@ -4,15 +4,16 @@
 #
 #-------------------------------------------------
 
-
+QT += multimedia
 QT       += core gui printsupport
 QT       += core gui sql
+QT       += core network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Atelier_Connexion
 TEMPLATE = app
-
+QMAKE_CXXFLAGS += -std=gnu++11
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -27,21 +28,35 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    arduino.cpp \
+    article.cpp \
+    client.cpp \
     depense.cpp \
+    dumessengerserver.cpp \
+    dumessengersocket.cpp \
     equipement.cpp \
+    historique.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
     qcustomplot.cpp \
-    statistique.cpp
+    statistique.cpp \
+    statistiques.cpp
 
 HEADERS += \
+    arduino.h \
+    article.h \
+    client.h \
     depense.h \
+    dumessengerserver.h \
+    dumessengersocket.h \
     equipement.h \
+    historique.h \
         mainwindow.h \
     connection.h \
     qcustomplot.h \
-    statistique.h
+    statistique.h \
+    statistiques.h
 
 FORMS += \
         mainwindow.ui
@@ -55,6 +70,7 @@ RESOURCES += \
     ressource.qrc
 
 DISTFILES += \
+    Gravira.png \
     chineese.qm \
     english.qm \
     logo.jpg

@@ -8,7 +8,9 @@
 #include "connection.h"
 #include "connection.h"
 #include "QTextStream"
-
+#include <QFile>
+#include <QSound>
+#include <QPropertyAnimation>
 
 
 int main(int argc, char *argv[])
@@ -16,6 +18,16 @@ int main(int argc, char *argv[])
 
 
     QApplication a(argc, argv);
+
+
+    //set the app style sheet
+
+
+    QFile styleSheetFile(":/Gravira.qss");
+    styleSheetFile.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(styleSheetFile.readAll());
+    //a.setStyleSheet(styleSheet);
+
 
     QTranslator t;
     QTranslator guide;

@@ -56,6 +56,69 @@ Depense::Depense(QString type_dep,QString montant_dep)
 
     }
 
+    bool Depense::ajouter_historic_depense()
+    {
+        QSqlQuery query;
+        QString id_string=QString::number(id_dep);
+        QString option_dep="Ajouter";
+                query.prepare("INSERT INTO historique_depense(id_dep,type_dep,montant_dep,date_dep,option_dep)"
+        "VALUES (:id_dep, :type_dep, :montant_dep, :date_dep, :option_dep)");
+        query.bindValue(0,id_string);
+        query.bindValue(1,type_dep);
+        query.bindValue(2,montant_dep);
+        query.bindValue(3,QDate::currentDate());
+        query.bindValue(4,option_dep);
+        return query.exec();
+
+
+    }
+
+    bool Depense::modifier_historic_depense(int id,QString type,QString montant)
+    {
+
+
+        QSqlQuery query;
+        QString id_string=QString::number(id);
+        QString option_dep="Modifier";
+                query.prepare("INSERT INTO historique_depense(id_dep,type_dep,montant_dep,date_dep,option_dep)"
+        "VALUES (:id, :type, :montant, :date, :option_dep)");
+        query.bindValue(0,id_string);
+        query.bindValue(1,type);
+        query.bindValue(2,montant);
+        query.bindValue(3,QDate::currentDate());
+        query.bindValue(4,option_dep);
+        return query.exec();
+
+    }
+
+
+    bool Depense::supprimer_historic_depense(int id_dep)
+    {
+
+
+        QSqlQuery query,select;
+        QString id_string=QString::number(id_dep);
+        QString option_dep="Supprimer";
+                select.prepare("SELECT id_dep, type_dep, montant_dep,date_dep FROM dépense where id_dep LIKE '"+id_string+"' ");
+
+                 select.exec();
+
+                QString idt=select.value(0).toString();
+                QString typet=select.value(1).toString();
+                QString montantt=select.value(2).toString();
+               QDate datet=select.value(3).toDate();
+
+                query.prepare("INSERT INTO historique_depense(id_dep,type_dep,montant_dep,date_dep,option_dep)"
+        "VALUES (:idt, :typet, :montantt, :datet, :option_dep)");
+        query.bindValue(0,idt);
+        query.bindValue(1,typet);
+        query.bindValue(2,montantt);
+        query.bindValue(3,QDate::currentDate());
+        query.bindValue(4,option_dep);
+        return query.exec();
+
+    }
+
     QSqlQueryModel * Depense::rechercher(int id_dep)
     {
         QString id_string=QString::number(id_dep);

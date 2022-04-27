@@ -1,0 +1,3 @@
+mar. avr. 26 22:02:36 2022 La modification de l'equipement a la base de donnees d'identifiant = 2222222, d'etat = Nouveau, de type = Eau de Javel et de quantite=245  a ete effectue avec succes
+mar. avr. 26 22:02:59 2022 L'ajout de l'equipement a la base de donnees d'identifiant = 2434, d'etat = Utilise, de type = Machine a Laver et de quantite=?  a ete effectue avec succes
+mar. avr. 26 22:04:02 2022 La suppression de l'equipement a la base de donnees d'identifiant = 71  a ete effectue avec succes

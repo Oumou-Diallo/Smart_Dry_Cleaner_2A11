@@ -1,0 +1,4 @@
+mar. avr. 26 18:44:56 2022 L'ajout d'une d?pense a la base de donnees d'identifiant = , de type = Salaire, de montant = 77 a ete effectue avec succes
+mar. avr. 26 18:50:01 2022 L'ajout d'une d?pense a la base de donnees d'identifiant = 1234, de type = Impot, de montant = 335 a ete effectue avec succes
+mar. avr. 26 18:51:33 2022 La suppression d'une depense a la base de donnees d'identifiant = 1 a ete effectue avec succes
+mar. avr. 26 21:39:30 2022 La modification d'une depense a la base de donnees d'identifiant = 1234 , de type= Frais d'entretien, de montant 23 a ete effectue avec succes

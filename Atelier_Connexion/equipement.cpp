@@ -70,6 +70,44 @@ bool equipement::ajouter_eq()
              return query.exec();
 }
 
+
+bool equipement::ajouter_historic_equipement()
+{
+/*
+    QSqlQuery query;
+    QString id_string=QString::number(id_eq);
+    QString option_dep="Ajouter";
+            query.prepare("INSERT INTO historique_equipement(id_eq,etat,prix_eq,type_eq,date_eq,option_eq)"
+    "VALUES (:id_eq,:etat,:prix_eq, :type_eq,:date_dep, :option_dep)");
+    query.bindValue(0,id_string);
+    //query.bindValue(1,_etat);
+    query.bindValue(2,montant_dep);
+    query.bindValue(3,QDate::currentDate());
+    query.bindValue(4,option_dep);
+    return query.exec();*/
+
+
+}
+/*bool equipement::modifier_historic_depense(int,QString,QString)
+{
+
+    QSqlQuery query;
+    QString id_string=QString::number(id);
+    QString option_dep="Modifier";
+            query.prepare("INSERT INTO historique_depense(id_dep,type_dep,montant_dep,date_dep,option_dep)"
+    "VALUES (:id, :type, :montant, :date, :option_dep)");
+    query.bindValue(0,id_string);
+    query.bindValue(1,type);
+    query.bindValue(2,montant);
+    query.bindValue(3,QDate::currentDate());
+    query.bindValue(4,option_dep);
+    return query.exec();
+
+
+
+
+}
+*/
 QSqlQueryModel* equipement::afficher_eq()
 {
     QSqlQueryModel* model=new QSqlQueryModel();
@@ -96,6 +134,25 @@ bool equipement::modifier_eq()
          return query.exec();
 }
 
+
+bool equipement::chercher(QString id)
+{
+    QSqlQuery *query = new QSqlQuery;
+    query->prepare("select id_eq from EQUIPEMENT where id_eq='"+id+"'");
+    if (query->exec())
+    {
+
+        while(query->next()){
+                   auto chk = query->value(0).toString();
+                   if(chk == id)
+                       return true;
+                }
+
+    }
+    return false;
+
+}
+
 bool equipement::supprimer_eq(int id_eq)
 {
     QSqlQuery query;
@@ -118,11 +175,11 @@ return model;
 }
 
 
-QSqlQueryModel *equipement::cherch_type(QString type)
+QSqlQueryModel *equipement::cherch_type(QString nom)
 {
     QSqlQueryModel * model= new QSqlQueryModel();
 
-        model->setQuery("select  * from equipement where type LIKE '%"+type+"%'");
+        model->setQuery("select  * from equipement where type_eq LIKE '%"+nom+"%'");
         model->setHeaderData(0, Qt::Horizontal, QObject::tr("id"));
         model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
         model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prix"));
@@ -135,11 +192,11 @@ QSqlQueryModel *equipement::cherch_etat(QString nom)
 {
     QSqlQueryModel * model= new QSqlQueryModel();
 
-        model->setQuery("select  * from equipement where nom LIKE '%"+etat+"%' Or  LIKE '%"+type_eq+"%' OR  LIKE '%"+id_eq+"%'");
-        model->setHeaderData(0, Qt::Horizontal, QObject::tr("id"));
-        model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
-        model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prix"));
-        model->setHeaderData(3, Qt::Horizontal, QObject::tr("type"));
+        model->setQuery("select  * from equipement where etat LIKE '%"+nom+"%' OR type_eq LIKE '%"+nom+"%' OR id_eq LIKE '%"+nom+"%' OR qte_eq LIKE '%"+nom+"%'");
+        model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
+        model->setHeaderData(1, Qt::Horizontal, QObject::tr("Etat"));
+        model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
+        model->setHeaderData(3, Qt::Horizontal, QObject::tr("Quantite"));
 return model;
 }
 

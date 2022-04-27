@@ -1,37 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt" sourcelanguage="fr">
+<TS version="2.1">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="14"/>
         <source>Gestion De Pressing</source>
-        <oldsource>Gestion des Dépenses</oldsource>
-        <translation type="unfinished">Gerenciamento de despesas</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="186"/>
-        <source>Afficher Dépense</source>
-        <translation>Mostrar Despesa</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="79"/>
-        <location filename="mainwindow.ui" line="240"/>
-        <location filename="mainwindow.ui" line="525"/>
-        <location filename="mainwindow.ui" line="714"/>
-        <source>Supprimer</source>
-        <translation>Remover</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="1155"/>
-        <location filename="mainwindow.ui" line="1956"/>
-        <source>identifiant</source>
-        <translation>conecte-se</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="1085"/>
-        <source>Ajouter Dépense</source>
-        <translation>Adicionar Despesa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="34"/>
@@ -50,7 +25,15 @@
         <location filename="mainwindow.ui" line="2251"/>
         <location filename="mainwindow.ui" line="2349"/>
         <source>Identifiant</source>
-        <translation type="unfinished">Conecte-se</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="79"/>
+        <location filename="mainwindow.ui" line="240"/>
+        <location filename="mainwindow.ui" line="525"/>
+        <location filename="mainwindow.ui" line="714"/>
+        <source>Supprimer</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="92"/>
@@ -79,6 +62,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="154"/>
+        <location filename="mainwindow.ui" line="378"/>
+        <location filename="mainwindow.ui" line="613"/>
+        <location filename="mainwindow.ui" line="750"/>
+        <location filename="mainwindow.ui" line="3398"/>
+        <source>Imprimer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="167"/>
         <location filename="mainwindow.ui" line="417"/>
         <location filename="mainwindow.ui" line="626"/>
@@ -92,6 +84,11 @@
         <location filename="mainwindow.ui" line="672"/>
         <location filename="mainwindow.ui" line="884"/>
         <source>PDF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="186"/>
+        <source>Afficher Dépense</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -181,6 +178,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="1033"/>
+        <location filename="mainwindow.ui" line="1233"/>
+        <location filename="mainwindow.ui" line="1454"/>
+        <location filename="mainwindow.ui" line="1625"/>
+        <source>Ajouter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="1056"/>
         <location filename="mainwindow.ui" line="1834"/>
         <source>Telephone</source>
@@ -193,105 +198,62 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="1085"/>
+        <source>Ajouter Dépense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="1109"/>
         <location filename="mainwindow.ui" line="1920"/>
         <source>type</source>
-        <translation>tipo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1122"/>
         <location filename="mainwindow.ui" line="1933"/>
         <source>montant</source>
-        <translation>montante</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1155"/>
+        <location filename="mainwindow.ui" line="1956"/>
+        <source>identifiant</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1168"/>
         <location filename="mainwindow.ui" line="1969"/>
         <source>Salaire</source>
-        <translation>Salário</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1181"/>
         <location filename="mainwindow.ui" line="1982"/>
         <source>Impot</source>
-        <translation>Imposto</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1194"/>
         <location filename="mainwindow.ui" line="1995"/>
         <source>Frais d&apos;entretien</source>
-        <translation>Taxas de manutenção</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1207"/>
         <location filename="mainwindow.ui" line="2008"/>
         <source>Remboursement</source>
-        <translation>Reembolso</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1220"/>
         <source>Frais d&apos;equipement</source>
-        <translation>Custos de equipamentos</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3407"/>
-        <location filename="mainwindow.ui" line="3452"/>
-        <source>Copier</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3416"/>
-        <source>Coller</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3425"/>
-        <source>Couper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3434"/>
-        <source>Trouver</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3443"/>
-        <source>Tout Selectionner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3461"/>
-        <source>Bold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3470"/>
-        <source>Italic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3479"/>
-        <source>Souligner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3488"/>
-        <source>Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="1033"/>
-        <location filename="mainwindow.ui" line="1233"/>
-        <location filename="mainwindow.ui" line="1454"/>
-        <location filename="mainwindow.ui" line="1625"/>
-        <source>Ajouter</source>
-        <translation>Adicionar</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1246"/>
         <location filename="mainwindow.ui" line="2034"/>
         <source>date</source>
-        <translation>datado</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1310"/>
@@ -310,12 +272,19 @@
         <location filename="mainwindow.ui" line="2225"/>
         <location filename="mainwindow.ui" line="2428"/>
         <source>Type</source>
-        <translation type="unfinished">Tipo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1361"/>
         <location filename="mainwindow.ui" line="2212"/>
         <source>Quantité</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1390"/>
+        <location filename="mainwindow.ui" line="2183"/>
+        <location filename="mainwindow.ui" line="3371"/>
+        <source>Nouveau</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -394,22 +363,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1908"/>
-        <source>Modifier Dépense</source>
-        <translation>Editar Despesa</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="2021"/>
-        <source>Frais d&apos;équipement</source>
-        <translation>Custos de equipamentos</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1726"/>
         <location filename="mainwindow.ui" line="2047"/>
         <location filename="mainwindow.ui" line="2264"/>
         <location filename="mainwindow.ui" line="2487"/>
         <source>Modifier</source>
-        <translation>Para modificar</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1908"/>
+        <source>Modifier Dépense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="2021"/>
+        <source>Frais d&apos;équipement</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2120"/>
@@ -429,7 +398,7 @@
     <message>
         <location filename="mainwindow.ui" line="2538"/>
         <source>Calculatrice</source>
-        <translation>Calculadora</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2568"/>
@@ -449,6 +418,11 @@
     <message>
         <location filename="mainwindow.ui" line="2658"/>
         <source>+/-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="2687"/>
+        <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -474,47 +448,7 @@
     <message>
         <location filename="mainwindow.ui" line="2832"/>
         <source>+</source>
-        <translation>+</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="2687"/>
-        <source>-</source>
-        <translation>-</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3064"/>
-        <source>/</source>
-        <translation>/</translation>
-    </message>
-    <message>
-        <source>*</source>
-        <translation type="vanished">*</translation>
-    </message>
-    <message>
-        <source>Résultat</source>
-        <translation type="vanished">Resultados</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3325"/>
-        <source>Text</source>
-        <translation>Texto</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3143"/>
-        <source>Historique</source>
-        <translation>Histórico</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="3311"/>
-        <source>Fichier</source>
-        <translation>Arquivo</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="1390"/>
-        <location filename="mainwindow.ui" line="2183"/>
-        <location filename="mainwindow.ui" line="3371"/>
-        <source>Nouveau</source>
-        <translation>Novo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="2861"/>
@@ -552,6 +486,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="3064"/>
+        <source>/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="3102"/>
         <source>Statistique</source>
         <translation type="unfinished"></translation>
@@ -564,6 +503,11 @@
     <message>
         <location filename="mainwindow.ui" line="3137"/>
         <source>Statistique Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="3143"/>
+        <source>Historique</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -617,44 +561,74 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="3311"/>
+        <source>Fichier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="3325"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="3380"/>
         <source>Ouvrir</source>
-        <translation>Abrir</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="3389"/>
         <source>Sortir</source>
-        <translation>Saída</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="154"/>
-        <location filename="mainwindow.ui" line="378"/>
-        <location filename="mainwindow.ui" line="613"/>
-        <location filename="mainwindow.ui" line="750"/>
-        <location filename="mainwindow.ui" line="3398"/>
-        <source>Imprimer</source>
-        <translation>Imprimir</translation>
+        <location filename="mainwindow.ui" line="3407"/>
+        <location filename="mainwindow.ui" line="3452"/>
+        <source>Copier</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Editer</source>
-        <translation type="vanished">Editar</translation>
+        <location filename="mainwindow.ui" line="3416"/>
+        <source>Coller</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Modifié</source>
-        <translation type="vanished">Alterados</translation>
+        <location filename="mainwindow.ui" line="3425"/>
+        <source>Couper</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>erreur::</source>
-        <translation type="vanished">erro::</translation>
+        <location filename="mainwindow.ui" line="3434"/>
+        <source>Trouver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="3443"/>
+        <source>Tout Selectionner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="3461"/>
+        <source>Bold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="3470"/>
+        <source>Italic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="3479"/>
+        <source>Souligner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="3488"/>
+        <source>Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <location filename="depense.cpp" line="128"/>
-        <source>id_dep</source>
-        <translation>id_dep</translation>
-    </message>
     <message>
         <location filename="article.cpp" line="39"/>
         <location filename="article.cpp" line="55"/>
@@ -686,7 +660,7 @@
         <location filename="mainwindow.cpp" line="173"/>
         <location filename="mainwindow.cpp" line="438"/>
         <source>Identifiant</source>
-        <translation>Conecte-se</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="article.cpp" line="40"/>
@@ -747,60 +721,7 @@
         <location filename="mainwindow.cpp" line="176"/>
         <location filename="mainwindow.cpp" line="439"/>
         <source>Type</source>
-        <translation>Tipo</translation>
-    </message>
-    <message>
-        <location filename="depense.cpp" line="179"/>
-        <location filename="depense.cpp" line="192"/>
-        <location filename="depense.cpp" line="202"/>
-        <location filename="depense.cpp" line="214"/>
-        <location filename="depense.cpp" line="226"/>
-        <location filename="mainwindow.cpp" line="148"/>
-        <location filename="mainwindow.cpp" line="161"/>
-        <location filename="mainwindow.cpp" line="440"/>
-        <source>Montant</source>
-        <translation>Quantidade</translation>
-    </message>
-    <message>
-        <location filename="depense.cpp" line="180"/>
-        <location filename="depense.cpp" line="193"/>
-        <location filename="depense.cpp" line="203"/>
-        <location filename="depense.cpp" line="215"/>
-        <location filename="depense.cpp" line="227"/>
-        <location filename="depense.cpp" line="248"/>
-        <location filename="mainwindow.cpp" line="162"/>
-        <location filename="mainwindow.cpp" line="441"/>
-        <source>Date</source>
-        <translation>Datado</translation>
-    </message>
-    <message>
-        <location filename="depense.cpp" line="247"/>
-        <source>Total des montants</source>
-        <translation>Valores totais</translation>
-    </message>
-    <message>
-        <location filename="main.cpp" line="75"/>
-        <source>la base de donnée est ouverte</source>
-        <translation>o banco de dados está aberto</translation>
-    </message>
-    <message>
-        <location filename="main.cpp" line="76"/>
-        <source>connexion réussie.
-Cliquez Cancel pour quitter.</source>
-        <translation>Conexão bem-sucedida.
-Clique em Cancelar para sair.</translation>
-    </message>
-    <message>
-        <location filename="main.cpp" line="81"/>
-        <source>la base de donnée est non ouverte</source>
-        <translation>o banco de dados não está aberto</translation>
-    </message>
-    <message>
-        <location filename="main.cpp" line="82"/>
-        <source>connexion échouée.
-Cliquez Cancel pour quitter.</source>
-        <translation>conexão falhou.
-Clique em Cancelar para sair.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="client.cpp" line="87"/>
@@ -879,6 +800,40 @@ Clique em Cancelar para sair.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="depense.cpp" line="128"/>
+        <source>id_dep</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="depense.cpp" line="179"/>
+        <location filename="depense.cpp" line="192"/>
+        <location filename="depense.cpp" line="202"/>
+        <location filename="depense.cpp" line="214"/>
+        <location filename="depense.cpp" line="226"/>
+        <location filename="mainwindow.cpp" line="148"/>
+        <location filename="mainwindow.cpp" line="161"/>
+        <location filename="mainwindow.cpp" line="440"/>
+        <source>Montant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="depense.cpp" line="180"/>
+        <location filename="depense.cpp" line="193"/>
+        <location filename="depense.cpp" line="203"/>
+        <location filename="depense.cpp" line="215"/>
+        <location filename="depense.cpp" line="227"/>
+        <location filename="depense.cpp" line="248"/>
+        <location filename="mainwindow.cpp" line="162"/>
+        <location filename="mainwindow.cpp" line="441"/>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="depense.cpp" line="247"/>
+        <source>Total des montants</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="equipement.cpp" line="116"/>
         <location filename="equipement.cpp" line="197"/>
         <location filename="equipement.cpp" line="210"/>
@@ -917,7 +872,29 @@ Clique em Cancelar para sair.</translation>
         <location filename="equipement.cpp" line="173"/>
         <location filename="equipement.cpp" line="186"/>
         <source>type</source>
-        <translation type="unfinished">tipo</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="75"/>
+        <source>la base de donnée est ouverte</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="76"/>
+        <source>connexion réussie.
+Cliquez Cancel pour quitter.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="81"/>
+        <source>la base de donnée est non ouverte</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.cpp" line="82"/>
+        <source>connexion échouée.
+Cliquez Cancel pour quitter.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="149"/>
